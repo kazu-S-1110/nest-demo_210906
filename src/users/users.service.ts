@@ -15,7 +15,11 @@ export class UsersService {
       username: user.username,
       password: user.password,
     });
-    return await createUser.save();
+    try {
+      return await createUser.save();
+    } catch (err) {
+      return err.message;
+    }
     // this.users.push(user); // usersの配列に引数のuserを追加する
   }
   async findAll() {
