@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Request,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -22,7 +23,8 @@ export class UsersController {
   @Get(':username')
   //関数の上に挟むことで認証がないと走らないようにする
   @UseGuards(AuthGuard('jwt'))
-  findOne(@Param('username') username: string) {
+  findOne(@Param('username') username: string, @Request() req: any) {
+    console.log(req);
     return this.usersService.findOne(username);
   }
 
